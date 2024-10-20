@@ -2,12 +2,12 @@
 Overview
 This Python script is designed to process a large dataset of car owners, specifically targeting data from China. The script performs several operations to clean and validate the data, ensuring its quality and usability for further analysis. The key functionalities include:
 
-# Column Translation: Translates column headers from Chinese to English.
-# Data Cleaning: Cleans and validates critical data fields like emails, mobile numbers, VINs, and ID numbers.
-# Address Merging: Combines multiple address-related columns into a single full_address field.
-# Duplicate Detection: Identifies and handles duplicate records based on VIN and ID numbers.
-# Data Separation: Segregates the dataset into clean and garbage (invalid or duplicate) data.
-# Chunk Processing: Processes the data in chunks to efficiently handle large files.
+Column Translation: Translates column headers from Chinese to English.
+Data Cleaning: Cleans and validates critical data fields like emails, mobile numbers, VINs, and ID numbers.
+Address Merging: Combines multiple address-related columns into a single full_address field.
+Duplicate Detection: Identifies and handles duplicate records based on VIN and ID numbers.
+Data Separation: Segregates the dataset into clean and garbage (invalid or duplicate) data.
+Chunk Processing: Processes the data in chunks to efficiently handle large files.
 # Prerequisites
 Python 3.x
 # Required Python Libraries:
