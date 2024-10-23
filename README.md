@@ -49,26 +49,26 @@ garbage_file_prefix = 'Input file path'
 
 ## Run the script:
 python car_owners_data_cleaning.py
-
 The script will process the dataset, saving cleaned and garbage records into separate files.
 
 ## Configuration
 translated_headers: Translates Chinese headers into English. Adjust if different translations are needed.
 columns_to_remove_in_clean: Specifies which columns to drop from the clean data but keep in the garbage data.
 chunk_size: Defines the size of data chunks to process at a time (default is 250,000 rows).
+
 ## File Structure
 car_owners_data_cleaning.py: The main script for data cleaning and validation.
 Cleaned Data Files: Processed data saved as Clean_China_chunk_X.csv for each chunk.
 Garbage Data Files: Invalid data saved as Garbage_China_chunk_X.csv for each chunk.
 Final Output Files: Merged final cleaned and garbage datasets saved as Clean_China_final.csv and Garbage_China_final.csv.
-Output
 
-## The script generates the following outputs:
-
+## Output
+The script generates the following outputs:
 Clean Data: Records with valid fields, saved in multiple chunk files and a final merged file.
 Garbage Data: Records with invalid fields or duplicates, saved in chunk files and a final merged file.
 Duplicates Report: Duplicates are identified in the final cleaned dataset and saved separately if any exist.
-Contributing
+
+## Contributing
 Feel free to open issues or submit pull requests for improvements or bug fixes. Contributions are welcome!
 
 ## License
