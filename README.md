@@ -2,80 +2,58 @@
 
 This Python script is designed to clean, validate, and process a large dataset of car owners, specifically for a dataset containing foreign language headers. It translates the headers into English, processes the data in chunks for efficiency, and separates the records into clean and garbage datasets based on various validation rules.
 
-## Table of Contents
-- [Overview]
-- [Features]
-- [Prerequisites]
-- [Installation]
-- [Usage]
-- [Configuration]
-- [File Structure]
-- [Output]
-- [Contributing]
-- [License]
+## Imports
+pandas
+re
+logging
+os
 
-## Overview
-The script processes a large dataset of car owners in chunks of 250,000 rows to manage memory efficiently. It cleans and validates the data, saving the results in separate files for further analysis. The script translates Chinese headers into English, removes unnecessary columns, and validates fields such as email, mobile phone, and IDs.
+## Setup and Configuration:
+	○ Logging Configuration: Logs messages with timestamps to track the processing progress and errors.
+	○ Translation of Headers: Translates foreign language headers into English for consistency.
+	○ Configuration:
+		§ Columns to remove from clean data but keep in garbage data.
+		§ Expected columns list for easier reference.
+		§ Chunk size set to 250,000 rows for optimized processing.
 
-## Features
-- **Data Translation:** Translates foreign language headers into English for easier processing.
-- **Data Cleaning:** Validates email addresses, phone numbers, VINs, and ID numbers.
-- **Data Validation:** Checks for alphanumeric values, duplicates, and properly formatted dates.
-- **Data Transformation:** Merges address components into a single 'full_address' field.
-- **Chunk Processing:** Processes the data in chunks of 250,000 rows for better memory management.
-- **Logging:** Logs the progress and any errors encountered during data processing.
-- **Customizable:** Easily adaptable for different datasets by changing configuration parameters.
+## Validation Functions:
+	○ is_valid_email: Checks if an email address has a valid format.
+	○ is_valid_mobile: Validates that the mobile number is numeric and of a reasonable length (7-15 digits).
+	○ is_alphanumeric: Checks if a given value contains only alphanumeric characters (used for VIN and ID validation).
+	○ safe_process: Wraps functions in a try-except block for safe execution, logging errors without stopping the process.
 
-## Prerequisites
-- Python 3.12 or higher
-- Required Python libraries:
-  - `pandas`
-  - `re`
-  - `logging`
-  - `os`
+## Data Processing:
+	○ Reads Data in Chunks: Processes data in chunks for memory efficiency.
+	○ Translates Column Names: Converts Chinese headers to English and then converts them to lowercase with underscores.
+	○ Removes Specified Columns: Drops specified columns from the clean data while retaining them in the garbage data.
 
-## Installation
-1. Clone this repository or download the script:
+## Data Cleaning and Validation:
+	○ Check for Duplicates: Identifies duplicates using VIN and ID number from the original data.
+	○ Email Cleaning: Converts emails to lowercase and replaces variations of "no email" with NaN.
+	○ Email Validation: Adds a flag to indicate if an email is valid.
+	○ Merge Address Fields: Merges 'address', 'city', 'province', and 'postal_code' into a single 'full_address' column.
+	○ VIN and ID Validation: Checks if VIN and ID numbers are alphanumeric.
+	○ Mobile and Date Validation: Checks if mobile numbers are valid and verifies that the date of birth is correctly formatted.
+	○ Separates Clean and Garbage Data: Creates a clean dataset with valid rows and a garbage dataset with invalid rows or duplicates.
 
-## Install the required dependencies:
-pip install pandas
+## Data Formatting and Saving:
+	○ Date of Birth Formatting: Ensures 'date_of_birth' is formatted as mm/dd/yyyy in the clean data.
+	○ Saves Clean and Garbage Data: Saves each processed chunk into separate clean and garbage CSV files.
+	○ Logs Information: Logs details such as the number of garbage rows per chunk.
 
-## Ensure that your dataset file is accessible on your local machine.
-Usage
-Update the file paths in the script:
-input_file = 'Input file path'
-clean_file_prefix = 'Input file path'
-garbage_file_prefix = 'Input file path'
+## Final Data Concatenation and Saving:
+	○ Merges Cleaned Chunks: Concatenates all clean data chunks into a single DataFrame.
+	○ Performs Final Duplicates Check: Identifies duplicates in the combined clean data.
+	○ Saves Final Clean Data: Excludes duplicates and saves the final clean dataset to a CSV file.
+	○ Saves Duplicates Separately: If any duplicates remain, saves them to a separate CSV file.
+	○ Merges and Saves All Garbage Data: Combines all garbage chunks and saves them to a final garbage dataset.
 
-## Run the script:
-python car_owners_data_cleaning.py
-The script will process the dataset, saving cleaned and garbage records into separate files.
-
-## Configuration
-translated_headers: Translates Chinese headers into English. Adjust if different translations are needed.
-columns_to_remove_in_clean: Specifies which columns to drop from the clean data but keep in the garbage data.
-chunk_size: Defines the size of data chunks to process at a time (default is 250,000 rows).
-
-## File Structure
-car_owners_data_cleaning.py: The main script for data cleaning and validation.
-Cleaned Data Files: Processed data saved as Clean_China_chunk_X.csv for each chunk.
-Garbage Data Files: Invalid data saved as Garbage_China_chunk_X.csv for each chunk.
-Final Output Files: Merged final cleaned and garbage datasets saved as Clean_China_final.csv and Garbage_China_final.csv.
-
-## Output
-The script generates the following outputs:
-Clean Data: Records with valid fields, saved in multiple chunk files and a final merged file.
-Garbage Data: Records with invalid fields or duplicates, saved in chunk files and a final merged file.
-Duplicates Report: Duplicates are identified in the final cleaned dataset and saved separately if any exist.
-
-## Contributing
-Feel free to open issues or submit pull requests for improvements or bug fixes. Contributions are welcome!
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for more details.
+## Example Usage:
+	○ Defines input file path and prefixes for output clean and garbage files.
+Calls process_data() function to start the ETL process with specified file paths and configurations
 
 
-## This `README.md` explains the script’s functionality, setup instructions, and configuration options while giving an overview of its features and outputs. It’s structured to help users understand how to use and adapt the script for their needs.
+
 
 
  
