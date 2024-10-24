@@ -9,9 +9,14 @@ Process the data in manageable chunks to optimize memory usage.
 Output clean data and garbage data separately for further analysis.
 
 ## Libraries Used
-pandas: For data manipulation and processing.
-re: For regular expression operations, mainly used in data validation.
-logging: To log the progress and errors during data processing.
+pandas: 
+For data manipulation and processing.
+
+re: 
+For regular expression operations, mainly used in data validation.
+
+logging: 
+To log the progress and errors during data processing.
 os: To handle file paths and check for the existence of files.
 
 ## Features
