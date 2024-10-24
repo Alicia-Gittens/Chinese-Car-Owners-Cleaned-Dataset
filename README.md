@@ -17,7 +17,9 @@ For regular expression operations, mainly used in data validation.
 
 logging: 
 To log the progress and errors during data processing.
-os: To handle file paths and check for the existence of files.
+
+os: 
+To handle file paths and check for the existence of files.
 
 ## Features
 Chunk Processing: 
